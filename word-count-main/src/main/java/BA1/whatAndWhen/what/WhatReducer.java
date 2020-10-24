@@ -1,4 +1,4 @@
-package BA1;
+package BA1.whatAndWhen.what;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -11,19 +11,18 @@ import java.io.IOException;
  * word, list<count> pairs.  Sums up individual counts per given word. Emits
  * <word, total count> pairs.
  */
-public class UserSortReducer
-        extends Reducer<IntWritable, Text, IntWritable, Text> {
+public class WhatReducer
+extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     @Override
     protected void reduce(
-            IntWritable key, Iterable<Text> values, Context context)
-            throws IOException, InterruptedException {
-        StringBuffer sb = new StringBuffer();
+            Text key, Iterable<IntWritable> values, Context context)
+    throws IOException, InterruptedException {
+        int count = 0;
         // calculate the total count
-        for(Text val : values){
-            sb.append(val).append("\t");
+        for(IntWritable val : values){
+            count += val.get();
         }
-        context.write(key, new Text(sb.toString()));
+        context.write(key, new IntWritable(count));
     }
-
 }
