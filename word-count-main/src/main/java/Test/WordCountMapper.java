@@ -1,4 +1,4 @@
-package BA2;
+package Test;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;

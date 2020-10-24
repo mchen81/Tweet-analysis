@@ -11,7 +11,7 @@ import java.io.IOException;
  * word, list<count> pairs.  Sums up individual counts per given word. Emits
  * <word, total count> pairs.
  */
-public class WordCountReducer
+public class GetWeekTagReducer
 extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     @Override
@@ -25,5 +25,4 @@ extends Reducer<Text, IntWritable, Text, IntWritable> {
         }
         context.write(key, new IntWritable(count));
     }
-
 }

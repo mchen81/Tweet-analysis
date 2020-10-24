@@ -12,25 +12,25 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * This is the main class. Hadoop will invoke the main method of this class.
+ * Transfer data to KV<$week677X:X677$hashtag, number> format
  */
-public class WordCountJob extends Configured implements Tool {
+public class GetWeekTagJob extends Configured implements Tool {
     @Override
     public int run(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
 
         //delimiter
-        conf.set("textinputformat.record.delimiter", "U\thttp://twitter.com/");
+        conf.set("textinputformat.record.delimiter", "T\t2009-");
 
         /* Job Name. You'll see this in the YARN webapp */
-        Job job = Job.getInstance(conf, "word count job");
+        Job job = Job.getInstance(conf, "MAP TO week677X:X677hashtag, number");
 
         /* Current class */
-        job.setJarByClass(WordCountJob.class);
+        job.setJarByClass(GetWeekTagJob.class);
 
         /* Mapper class */
-        job.setMapperClass(WordCountMapper.class);
+        job.setMapperClass(GetWeekTagMapper.class);
 
         /* Combiner class. Combiners are run between the Map and Reduce
          * phases to reduce the amount of output that must be transmitted.
@@ -41,7 +41,7 @@ public class WordCountJob extends Configured implements Tool {
         //job.setCombinerClass(WordCountReducer.class);
 
         /* Reducer class */
-        job.setReducerClass(WordCountReducer.class);
+        job.setReducerClass(GetWeekTagReducer.class);
 
         /* Outputs from the Mapper. */
         job.setMapOutputKeyClass(Text.class);
@@ -54,23 +54,8 @@ public class WordCountJob extends Configured implements Tool {
         /* Reduce tasks */
         job.setNumReduceTasks(1);
 
-//        job.getConfiguration().setInt("mapreduce.input.lineinputformat.linespermap", 4);
-//
-//        job.setOutputFormatClass(FileOutputFormat.class);
-//        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-//
-//      //  LazyOutputFormat.setOutputFormatClass(job, TextOutputFormat.class);
-//       // FileInputFormat.addInputPath(job, new Path(args[0]));
-//        LazyOutputFormat.setOutputFormatClass(job, TextOutputFormat.class);
-      //  FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
-//            /* Job input path in HDFS */
-            FileInputFormat.addInputPath(job, new Path(args[0]));
-
-            /* Job output path in HDFS. NOTE: if the output path already exists
-             * and you try to create it, the job will fail. You may want to
-             * automate the creation of new output directories here */
-            FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         /* Wait (block) for the job to complete... */
         boolean success = job.waitForCompletion(true);
@@ -79,7 +64,7 @@ public class WordCountJob extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
         int exitCode = ToolRunner.run(new Configuration(),
-                new WordCountJob(), args);
+                new GetWeekTagJob(), args);
         System.exit(exitCode);
     }
 }
