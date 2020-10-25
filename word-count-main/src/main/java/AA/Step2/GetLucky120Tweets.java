@@ -26,7 +26,7 @@ public class GetLucky120Tweets extends Configured implements Tool {
         conf.set("textinputformat.record.delimiter", "T\t2009-");
 
         /* Job Name. You'll see this in the YARN webapp */
-        Job job = Job.getInstance(conf, "MAP TO week677X:X677hashtag, number");
+        Job job = Job.getInstance(conf, "AA2");
 
         /* Current class */
         job.setJarByClass(GetLucky120Tweets.class);

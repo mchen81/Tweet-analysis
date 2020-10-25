@@ -19,6 +19,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import util.SentimentAnalysis;
 
 /**
  * Use Microsoft Azure Cognitive Services to do sentiment analyze
@@ -31,7 +32,7 @@ public class BA3 {
      * metadata: all tweets belong to the keys(user or hashtag) we want to analyze
      */
     static String userDataPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA3/Step101";
-    static String HashTagDataPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA3/Step102";
+    static String HashTagDataPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA3/Step102";
     static String userOutputPath = "";
     static String tagOutputPath = "";
 
@@ -101,96 +102,12 @@ public class BA3 {
 
         //Step2: start sentiment analyze!
         for(String key : map.keySet()){
-            System.out.println(key + ": " + sentimentAnalysis(map.get(key), APIKey));
+            System.out.println(key + ": " + SentimentAnalysis.sentimentAnalysis(map.get(key), APIKey));
         }
         System.out.println();
     }
 
 
-    /**
-     * input: a list contains a batch of strings that we want to analyze
-     * @return total weighted positive/negative score
-     */
-    private static int sentimentAnalysis(List<String> stringList, String APIKey){
-        int score = 0;
 
-        ArrayList<String> list = new ArrayList<>();
-        for(String s : stringList){
-            list.add(s);
-            if(list.size() == 10){
-                score += apiCall(list, APIKey);
-                list = new ArrayList<>();
-            }
-        }
-
-        return score;
-    }
-
-    private static int apiCall(List<String> stringList, String APIKey){
-        HttpClient httpclient = HttpClients.createDefault();
-        JSONObject jsonObject = getRequestBody(stringList);
-
-        int score = 0;
-
-        try
-        {
-            URIBuilder builder = new URIBuilder(
-                    "https://eastus.api.cognitive.microsoft.com/text/analytics/v3.1-preview.1/sentiment");
-
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
-            request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", APIKey);
-
-            // Request body
-            StringEntity reqEntity = new StringEntity(jsonObject.toString());
-            request.setEntity(reqEntity);
-
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
-
-            if (entity != null)
-            {
-                JSONObject obj = new JSONObject(EntityUtils.toString(entity));
-                //System.out.println(obj);
-
-                JSONArray arr = obj.getJSONArray("documents");
-
-                for (int i = 0; i < arr.length(); i++) {
-                    String sentiments = arr.getJSONObject(i).getString("sentiment");
-                    if(sentiments.equals("negative")) score--;
-                    else if(sentiments.equals("positive")) score++;
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-        return score;
-    }
-
-    private static JSONObject getRequestBody(List<String> stringList){
-        JSONObject jsonObject = new JSONObject();
-
-        JSONArray array = new JSONArray();
-
-        int id = 1;
-        for (String sentence : stringList){
-            JSONObject sObj = new JSONObject();
-            sObj.put("language", "en");
-            sObj.put("id", Integer.toString(id));
-            sObj.put("text", sentence);
-
-            array.put(sObj);
-
-            id++;
-        }
-
-        jsonObject.put("documents", array);
-
-        return jsonObject;
-    }
 }
 

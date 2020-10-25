@@ -24,4 +24,12 @@ public class Utilities {
     public static HashSet<String> getLucky120Set(){
         return new HashSet<>(Arrays.asList(Constants.lucky120.split("\n")));
     }
+
+    /**
+     *
+     * @return a random integer in a particular range
+     */
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 }
