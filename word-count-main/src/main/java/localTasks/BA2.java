@@ -11,11 +11,11 @@ public class BA2 {
 //        new BA2().findTop5("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5TagV2"
 //                , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
 //                );
-
 //        new BA2().trend("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step4_trendV2"
 //                        , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
 //                , "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA2/step3_top5Tag"
 //        );
+
     }
 
 
