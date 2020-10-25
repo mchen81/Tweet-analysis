@@ -8,14 +8,14 @@ import java.util.PriorityQueue;
 
 public class BA2 {
     public static void main(String[] args) {
-//        new BA2().findTop5("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5Tag"
+//        new BA2().findTop5("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5TagV2"
 //                , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
 //                );
 
-        new BA2().trend("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step4_trend"
-                        , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
-                , "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA2/step3_top5Tag"
-        );
+//        new BA2().trend("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step4_trendV2"
+//                        , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
+//                , "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA2/step3_top5Tag"
+//        );
     }
 
 
@@ -40,9 +40,6 @@ public class BA2 {
                     hotTag = hotTag.replaceAll("[^a-zA-Z0-9@#]", "");
 
                     hotTagSet.add(hotTag);
-
-                 //   System.out.println(hotTag);
-//                    System.out.println(hotTag);
                 }
 
                 line  = br.readLine();
@@ -53,32 +50,33 @@ public class BA2 {
 
             line = br.readLine();
             int i = 0;
-            while(line != null && i++ < 5000){
+            while(line != null){
                 String[] sA1 = line.split("\\t");
-                if(sA1.length < 2) continue;
-
-                String weekAndTag = sA1[1];
-
-                int week = Integer.parseInt(weekAndTag
-                        .split("#")[0]
-                );
-
-                String tag = weekAndTag.split("#")[1];
-
-               // System.out.println(tag);
-
-                if(!hotTagSet.contains(tag)){
+                if(sA1.length < 2) {
                     line = br.readLine();
                     continue;
                 }
+                for(int j = 1; j < sA1.length; j++){
+                    String ss = sA1[j];
 
-                System.out.println(tag);
+                    String weekAndTag = ss;
 
-                int[] trend = map.getOrDefault(tag, new int[24]);
+                    String tag = weekAndTag.split("#")[1];
 
-                trend[week - 1] = Integer.parseInt(sA1[0]);
+                    int week = Integer.parseInt(weekAndTag
+                            .split("#")[0]
+                    );
 
-                map.put(tag, trend);
+                    if(!hotTagSet.contains(tag)){
+                        continue;
+                    }
+
+                    int[] trend = map.getOrDefault(tag, new int[24]);
+
+                    trend[week - 1] += Integer.parseInt(sA1[0]);
+
+                    map.put(tag, trend);
+                }
 
                 line = br.readLine();
             }
@@ -123,18 +121,24 @@ public class BA2 {
                 String[] sA1 = line.split("\\t");
                 if(sA1.length < 2) continue;
 
-                int week = Integer.parseInt(sA1[1]
-                    .split("#")[0]
-                );
+                for(int j = 1; j < sA1.length; j++){
+                    String ss = sA1[j];
 
-                PriorityQueue<String> queue = map.getOrDefault(
-                        week,
-                        new PriorityQueue<>(new TagComparator())
-                );
+                    int week = Integer.parseInt(ss
+                            .split("#")[0]
+                    );
 
-                queue.add(line);
 
-                map.put(week, queue);
+
+                    PriorityQueue<String> queue = map.getOrDefault(
+                            week,
+                            new PriorityQueue<>(new TagComparator())
+                    );
+
+                    queue.add(sA1[0] + "\t" + ss);
+
+                    map.put(week, queue);
+                }
 
                 line = br.readLine();
             }

@@ -47,11 +47,11 @@ extends Mapper<LongWritable, Text, Text, Text> {
 
         if(sArray1[2].endsWith("No Post Title")) return;
 
-        if(user.equals("followermonitor")
-                ||user.equals("delicious50")
-                ||user.equals("porngus")
-                ||user.equals("tweet_the_time")
-                ||user.equals("drunk_bot")
+        if(user.equals("delicious50")
+                ||user.equals("thinkingstiff")
+                ||user.equals("dominiquerdr")
+                ||user.equals("mariolavandeira")
+                ||user.equals("thegamingscoop")
         ){
             StringBuilder sb = new StringBuilder();
             sb
