@@ -4,7 +4,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-import util.WeekCompute;
+import util.Utilities;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -35,7 +35,7 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
         if(dayArray.length < 2) return;
 
         //Step1: extract week and month
-        int week = WeekCompute.getWeek(Integer.parseInt(dayArray[1]));
+        int week = Utilities.getWeek(Integer.parseInt(dayArray[1]));
         if(week == 0) return;
         int month = Integer.parseInt(dayArray[0]) - 6;
         week += month * 4;
