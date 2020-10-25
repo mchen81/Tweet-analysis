@@ -8,13 +8,13 @@ import java.util.PriorityQueue;
 
 public class BA2 {
     public static void main(String[] args) {
-//        new BA2().findTop5("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5TagV2"
-//                , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
-//                );
-//        new BA2().trend("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step4_trendV2"
-//                        , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTags"
-//                , "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/BA2/step3_top5Tag"
-//        );
+        new BA2().findTop5("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5TagV3"
+                , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTagsV2"
+                );
+        new BA2().trend("/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step4_trendV3"
+                        , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step2_sortedTagsV2"
+                , "/Users/jcliu/Projects/usfGit/cs677/Project2/BA/BA2/step3_top5TagV3"
+        );
 
     }
 
@@ -71,7 +71,7 @@ public class BA2 {
                         continue;
                     }
 
-                    int[] trend = map.getOrDefault(tag, new int[24]);
+                    int[] trend = map.getOrDefault(tag, new int[29]);
 
                     trend[week - 1] += Integer.parseInt(sA1[0]);
 
