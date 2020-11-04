@@ -74,6 +74,9 @@ public class UserSentimentAnalysis {
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             StringTokenizer stringTokenizer = new StringTokenizer(value.toString());
+            if (stringTokenizer.countTokens() < 3) {
+                return;
+            }
             String user = Utilities.getTweetUser(stringTokenizer.nextToken());
             if (userSet.contains(user)) {
                 stringTokenizer.nextToken(); // date
