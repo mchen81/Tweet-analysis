@@ -25,6 +25,13 @@ public class Utilities {
         return new HashSet<>(Arrays.asList(Constants.lucky120.split("\n")));
     }
 
+    public static String getTweetUser(String tweeterLink) {
+        if (tweeterLink == null || tweeterLink.length() < 20) {
+            return null;
+        }
+        return tweeterLink.substring(19);
+    }
+
     /**
      *
      * @return a random integer in a particular range
