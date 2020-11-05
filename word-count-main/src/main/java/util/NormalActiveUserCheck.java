@@ -11,7 +11,7 @@ public class NormalActiveUserCheck {
     public final static Set<String> normalActiveUserSet = new HashSet<>();
 
     static {
-        String nAUFile = "NormalActiveUsers/step1_candidates.txt";
+        String nAUFile = "/home/jliu158/NormalActiveUsers/step1_candidates.txt";
         String line;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(nAUFile));
