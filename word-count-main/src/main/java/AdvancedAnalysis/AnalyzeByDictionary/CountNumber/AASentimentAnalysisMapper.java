@@ -1,4 +1,4 @@
-package AdvancedAnalysis.AnalyzeByDictionary;
+package AdvancedAnalysis.AnalyzeByDictionary.CountNumber;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -40,13 +40,7 @@ extends Mapper<LongWritable, Text, Text, LongWritable> {
         if(hour == -1 || user == null || tweet == null) return;
         if(!NormalActiveUserCheck.isNormalActiveUser(user)) return;
 
-        long score = 0;
-        StringTokenizer stringTokenizer = new StringTokenizer(tweet);
-        while (stringTokenizer.hasMoreTokens()) {
-            score += WordSentimentUtil.getWordScore(stringTokenizer.nextToken());
-        }
-
-        context.write(new Text(Integer.toString(hour)), new LongWritable(score));
+        context.write(new Text(Integer.toString(hour)), new LongWritable(1));
     }
 
     private int gerHour(String line){

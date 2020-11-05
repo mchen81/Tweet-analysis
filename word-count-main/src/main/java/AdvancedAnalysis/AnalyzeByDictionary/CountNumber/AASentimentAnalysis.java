@@ -1,4 +1,4 @@
-package AdvancedAnalysis.AnalyzeByDictionary;
+package AdvancedAnalysis.AnalyzeByDictionary.CountNumber;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;

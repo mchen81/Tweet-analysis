@@ -1,4 +1,4 @@
-package AdvancedAnalysis.AnalyzeByDictionary;
+package AdvancedAnalysis.AnalyzeByDictionary.CountNumber;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
