@@ -1,6 +1,6 @@
-package AdvancedAnalysis.Step2;
+package AdvancedAnalysis.AnalyzeByDictionary;
 
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -11,18 +11,18 @@ import java.io.IOException;
  * word, list<count> pairs.  Sums up individual counts per given word. Emits
  * <word, total count> pairs.
  */
-public class GetLucky120TweetsReducer
-extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class AASentimentAnalysisReducer
+extends Reducer<Text, LongWritable, Text, LongWritable> {
 
     @Override
     protected void reduce(
-            Text key, Iterable<IntWritable> values, Context context)
+            Text key, Iterable<LongWritable> values, Context context)
     throws IOException, InterruptedException {
-        int count = 0;
+        long score = 0;
         // calculate the total count
-        for(IntWritable val : values){
-            count += val.get();
+        for(LongWritable val : values){
+            score += val.get();
         }
-        context.write(key, new IntWritable(count));
+        context.write(key, new LongWritable(score));
     }
 }
