@@ -1,21 +1,29 @@
-package AdvancedAnalysis.Step2;
+package AdvancedAnalysis.AnalyzeByDictionary;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import util.NormalActiveUserCheck;
+import util.WordSentimentUtil;
 
 /**
  * find all tweets that belong to lucky120(see Constants/constants)
  * and transform their format to $HourX===X$Tweet
  */
-public class GetLucky120Tweets extends Configured implements Tool {
+public class AASentimentAnalysis extends Configured implements Tool {
+
+    static {
+        new NormalActiveUserCheck();
+        new WordSentimentUtil();
+    }
+
     @Override
     public int run(String[] args) throws Exception {
 
@@ -28,10 +36,10 @@ public class GetLucky120Tweets extends Configured implements Tool {
         Job job = Job.getInstance(conf, "AA2");
 
         /* Current class */
-        job.setJarByClass(GetLucky120Tweets.class);
+        job.setJarByClass(AASentimentAnalysis.class);
 
         /* Mapper class */
-        job.setMapperClass(GetLucky120TweetsMapper.class);
+        job.setMapperClass(AASentimentAnalysisMapper.class);
 
         /* Combiner class. Combiners are run between the Map and Reduce
          * phases to reduce the amount of output that must be transmitted.
@@ -42,15 +50,15 @@ public class GetLucky120Tweets extends Configured implements Tool {
         //job.setCombinerClass(WordCountReducer.class);
 
         /* Reducer class */
-        job.setReducerClass(GetLucky120TweetsReducer.class);
+        job.setReducerClass(AASentimentAnalysisReducer.class);
 
         /* Outputs from the Mapper. */
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputValueClass(LongWritable.class);
 
         /* Outputs from the Reducer */
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(LongWritable.class);
 
         /* Reduce tasks */
         job.setNumReduceTasks(1);
@@ -65,7 +73,7 @@ public class GetLucky120Tweets extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
         int exitCode = ToolRunner.run(new Configuration(),
-                new GetLucky120Tweets(), args);
+                new AASentimentAnalysis(), args);
         System.exit(exitCode);
     }
 }

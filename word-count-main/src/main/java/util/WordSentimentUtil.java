@@ -15,8 +15,12 @@ public class WordSentimentUtil {
     public final static Set<String> negativeWordsSet = new HashSet<>();
 
     static {
-        String positiveTextFile = "SentimentWords/Positive.txt";
-        String negativeTextFile = "SentimentWords/Negative.txt";
+
+        String positiveTextFile = "/home/jliu158/SentimentWords/Positive.txt";
+        String negativeTextFile = "/home/jliu158/SentimentWords/Negative.txt";
+
+//        String positiveTextFile = "SentimentWords/Positive.txt";
+//        String negativeTextFile = "SentimentWords/Negative.txt";
         String line;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(positiveTextFile));

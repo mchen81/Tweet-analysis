@@ -1,4 +1,4 @@
-package AdvancedAnalysis.Step2;
+package AdvancedAnalysis.AnalyzeByAPI;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -39,7 +39,7 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
         //sanity check
         if(hour == -1 || user == null || tweet == null) return;
 
-        if(!lucky120Set.contains(user)) return;
+       // if(!NormalActiveUserCheck.isNormalActiveUser(user)) return;
 
         context.write(new Text(Integer.toString(hour) + "X===X" + tweet), new IntWritable(1));
     }

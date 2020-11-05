@@ -8,7 +8,7 @@ public class AdvancedAnalysisStep1 {
      * Modified these before run this code
      *
      */
-    static String inputPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/AA/step1_candidates";
+    static String inputPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/AA/step1_candidates.txt";
     static String outputPath = "/Users/jcliu/Projects/usfGit/cs677/Project2/P2-chenchenpi/results/AA/step2_shortlist";
 
     public static void main(String[] args) {
