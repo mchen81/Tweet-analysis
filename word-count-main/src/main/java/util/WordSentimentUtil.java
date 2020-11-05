@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 public class WordSentimentUtil {
 
     public final static Set<String> positiveWordsSet = new HashSet<>();
-    public final static Set<String> negativeWordsSet = new HashSet<>();
+    public final static Set<String> negativeWordsSet = new HashSet<>(git);
 
     static {
 
