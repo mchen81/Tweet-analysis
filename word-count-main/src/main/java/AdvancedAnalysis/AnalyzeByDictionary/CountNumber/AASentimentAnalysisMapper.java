@@ -12,16 +12,9 @@ import java.util.HashSet;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
  */
 public class AASentimentAnalysisMapper
 extends Mapper<LongWritable, Text, Text, LongWritable> {
-    private HashSet<String> lucky120Set;
-
-    public AASentimentAnalysisMapper(){
-        super();
-        this.lucky120Set = Utilities.getLucky120Set();
-    }
 
     @Override
     protected void map(LongWritable key, Text value, Context context)

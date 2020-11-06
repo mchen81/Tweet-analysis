@@ -1,14 +1,9 @@
 package util;
 
-import Constants.Constants;
-
-import java.util.Arrays;
-import java.util.HashSet;
-
 public class Utilities {
     /**
      *
-     * @param day
+     * @param day: the day of a month
      * @return the number of week, only 1 - 4
      */
     public static int getWeek(int day){
@@ -19,12 +14,9 @@ public class Utilities {
 
     /**
      *
-     * @return a hash set that comprised of all users in Constants.lucky120
+     * @param tweeterLink: the link of a tweet
+     * @return the userID
      */
-    public static HashSet<String> getLucky120Set(){
-        return new HashSet<>(Arrays.asList(Constants.lucky120.split("\n")));
-    }
-
     public static String getTweetUser(String tweeterLink) {
         if (tweeterLink == null || tweeterLink.length() < 20) {
             return null;

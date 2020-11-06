@@ -7,11 +7,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-/**
- * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
- */
 public class JsonToTextReducer
 extends Reducer<Text, NullWritable, Text, NullWritable> {
 

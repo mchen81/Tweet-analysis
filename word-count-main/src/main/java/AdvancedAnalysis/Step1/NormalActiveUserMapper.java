@@ -8,7 +8,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Check if the user is "normal active user", if yes, output userName and tweet number
  */
 public class NormalActiveUserMapper
 extends Mapper<LongWritable, Text, Text, IntWritable> {

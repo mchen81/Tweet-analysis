@@ -12,16 +12,17 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * This is the main class. Hadoop will invoke the main method of this class.
+ * The first step of Advanced Analysis.
+ * In Step1, we regard users who post an average of 2-4 tweets each day as "Normal Active Users"
+ * We use NormalActiveUser to find out the list of "Normal Active Users".
+ *
+ * Next step: Use AnalyzeByDictionary to do sentiment analysis
  */
 public class NormalActiveUser extends Configured implements Tool {
     @Override
     public int run(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
-
-        //delimiter
-       // conf.set("textinputformat.record.delimiter", "U\thttp://twitter.com/");
 
         /* Job Name. You'll see this in the YARN webapp */
         Job job = Job.getInstance(conf, "word count job");

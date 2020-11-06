@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/**
+ * As our normalActiveUserSet is a static object, you need to instantiation if before use it.
+ */
 public class NormalActiveUserCheck {
     public final static Set<String> normalActiveUserSet = new HashSet<>();
 
@@ -29,6 +33,10 @@ public class NormalActiveUserCheck {
         }
     }
 
+    /**
+     * @param userName:
+     * @return true if user is a "normal active user"
+     */
     public static boolean isNormalActiveUser(String userName){
         return normalActiveUserSet.contains(userName);
     }

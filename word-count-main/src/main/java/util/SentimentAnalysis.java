@@ -18,6 +18,8 @@ import java.util.List;
 
 public class SentimentAnalysis {
     /**
+     * Just for fun, was not used in the report
+     *
      * input: a list contains a batch of strings that we want to analyze
      * And also need APIKey for Azure Cognitive Services
      * @return total weighted positive/negative score
@@ -58,10 +60,6 @@ public class SentimentAnalysis {
             request.setEntity(reqEntity);
 
             HttpResponse response = httpclient.execute(request);
-
-//            if(response.getStatusLine().getStatusCode() != 200){
-//                System.out.println(response);
-//            }
 
             HttpEntity entity = response.getEntity();
 

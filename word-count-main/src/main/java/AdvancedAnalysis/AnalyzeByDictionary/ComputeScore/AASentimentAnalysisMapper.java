@@ -12,16 +12,13 @@ import java.util.HashSet;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper:
+ * Input: A single tweet
+ * Output: KV<Time, SentimentScore>
+ *     SentimentScore: 1 represent positive tweet, -1 negative, 0 for neutral
  */
 public class AASentimentAnalysisMapper
 extends Mapper<LongWritable, Text, Text, LongWritable> {
-    private HashSet<String> lucky120Set;
-
-    public AASentimentAnalysisMapper(){
-        super();
-        this.lucky120Set = Utilities.getLucky120Set();
-    }
 
     @Override
     protected void map(LongWritable key, Text value, Context context)
@@ -46,6 +43,7 @@ extends Mapper<LongWritable, Text, Text, LongWritable> {
             score += WordSentimentUtil.getWordScore(stringTokenizer.nextToken());
         }
 
+        //1 represent positive tweet, -1 negative, 0 for neutral
         if(score > 0) score = 1;
 //        if(score == 0) score = 0;
         if(score < 0) score = -1;

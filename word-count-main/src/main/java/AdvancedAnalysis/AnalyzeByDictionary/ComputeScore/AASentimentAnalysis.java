@@ -14,8 +14,9 @@ import util.NormalActiveUserCheck;
 import util.WordSentimentUtil;
 
 /**
- * find all tweets that belong to lucky120(see Constants/constants)
- * and transform their format to $HourX===X$Tweet
+ * Compute the total mood scores of each hour(0 - 23)
+ *
+ * input: All Tweet data(from June to December)
  */
 public class AASentimentAnalysis extends Configured implements Tool {
 

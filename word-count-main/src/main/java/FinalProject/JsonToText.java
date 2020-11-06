@@ -13,7 +13,8 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * Transfer data to KV<$week677X:X677$hashtag, number> format
+ * Transform our final project dataset from json format to text format.
+ * As we only care about Username, ProductID, and ReviewTime, we also filter out other infos.
  */
 public class JsonToText extends Configured implements Tool {
     @Override

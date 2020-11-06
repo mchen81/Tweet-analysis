@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Input: A single record in Json format
+ * Output: ASIN\tReviewerId\tReviewTime
  */
 public class JsonToTextMapper
 extends Mapper<LongWritable, Text, Text, NullWritable> {
