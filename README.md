@@ -14,11 +14,11 @@ Draft report: https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_
   
      yarn jar ./wordcount-1.0.jar AdvancedAnalysis.AnalyzeByDictionary.ComputeScore.AASentimentAnalysis /outAA02/part-r-00000 /outAA03
      
-  Step3: count the number of tweets that from "normal active users" per hour:
+  Step3: count the number of tweets from "normal active users" per hour:
      
      yarn jar ./wordcount-1.0.jar AdvancedAnalysis.AnalyzeByDictionary.CountNumber.AASentimentAnalysis /outAA02/part-r-00000 /outAA03
      
-  Step4: Now, we have total score and number of tweets for each hour. Do `FinalScore = TotalScore/NumberOfTweets` 24 times on our calculator.
+  Step4: Now, we have total score and number of tweets for each hour. Do `FinalScore = TotalScore / NumberOfTweets` 24 times on our calculator to get the final result.
 
 ## Final Project Dataset Prepeocess:
 
