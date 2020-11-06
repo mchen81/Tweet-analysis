@@ -17,21 +17,22 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class UserSentimentAnalysis {
+public class HashtagSentimentAnalysis {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         if (args.length != 3) {
-            throw new IllegalArgumentException("[UserSentimentAnalysis] Usage: input output");
+            throw new IllegalArgumentException("[HashtagSentimentAnalysis] Usage: input output");
         }
 
         Configuration configuration = new Configuration();
 
-        Job job = Job.getInstance(configuration, "UserSentimentAnalysis");
-        job.setJarByClass(UserSentimentAnalysis.class);
+
+        Job job = Job.getInstance(configuration, "HashtagSentimentAnalysis");
+        job.setJarByClass(HashtagSentimentAnalysis.class);
 
         // map and reduce class set up
-        job.setMapperClass(UserSentimentAnalysisMapper.class);
-        job.setReducerClass(UserSentimentAnalysisReducer.class);
+        job.setMapperClass(HashtagSentimentAnalysisMapper.class);
+        job.setReducerClass(HashtagSentimentAnalysisReducer.class);
         // map output set up
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
@@ -49,18 +50,26 @@ public class UserSentimentAnalysis {
     }
 
 
-    public static class UserSentimentAnalysisMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-        public static Set<String> userSet = new HashSet<>();
+    public static class HashtagSentimentAnalysisMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+        public static Set<String> hashTagSet = new HashSet<>();
 
         @Override
         protected void setup(Context context) throws IOException, InterruptedException {
             new WordSentimentUtil();
-
-            userSet.add("delicious50");
-            userSet.add("thinkingstiff");
-            userSet.add("dominiquerdr");
-            userSet.add("mariolavandeira");
-            userSet.add("thegamingscoop");
+            hashTagSet.add("#140mafia");
+            hashTagSet.add("#fb");
+            hashTagSet.add("#ff");
+            hashTagSet.add("#iranelection");
+            hashTagSet.add("#jobs");
+            hashTagSet.add("#tcot");
+            hashTagSet.add("#mobsterworld");
+            hashTagSet.add("#imthankfulfor");
+            hashTagSet.add("#iaintafraidtosay");
+            hashTagSet.add("#wheniwaslittle");
+            hashTagSet.add("#justbecause");
+            hashTagSet.add("#donttrytoholla");
+            hashTagSet.add("#in2020");
+            hashTagSet.add("#09memories");
         }
 
         /**
@@ -78,32 +87,33 @@ public class UserSentimentAnalysis {
             if (stringTokenizer.countTokens() < 3) {
                 return;
             }
-            String user = stringTokenizer.nextToken();
-            if (userSet.contains(user)) {
-                stringTokenizer.nextToken(); // date
-                stringTokenizer.nextToken(); // time
-                int score = 0;
-                while (stringTokenizer.hasMoreTokens()) {
-                    score += WordSentimentUtil.getWordScore(stringTokenizer.nextToken());
+            String theHahTag = null;
+            int score = 0;
+            while (stringTokenizer.hasMoreTokens()) {
+                String word = stringTokenizer.nextToken().toLowerCase();
+                if (hashTagSet.contains(word)) {
+                    theHahTag = word;
                 }
+                score += WordSentimentUtil.getWordScore(word);
+            }
+            if (theHahTag != null) {
                 if (score > 0) {
                     score = 1;
                 } else if (score < 0) {
                     score = -1;
                 }
-                context.write(new Text(user), new IntWritable(score));
+                context.write(new Text(theHahTag), new IntWritable(score));
             }
         }
     }
 
-    public static class UserSentimentAnalysisReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+    public static class HashtagSentimentAnalysisReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
         @Override
         protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             int score = 0;
             for (IntWritable i : values) {
                 score += i.get();
             }
-            int finalScore = 0;
 
             context.write(key, new IntWritable(score));
         }
