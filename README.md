@@ -1,6 +1,11 @@
 # P2-JerryAndJiachen
 
-Draft report: https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_Xclvkgk1k8lhg/edit?usp=sharing
+[Report Document](https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_Xclvkgk1k8lhg/edit?usp=sharing)
+
+## Sentiment Analysis
+We collected a lot of postive/negative vocabulary in englush.    
+The sentiment analysis is based on [the word lists](https://github.com/usf-cs677-fa20/P2-chenchenpi/tree/master/word-count-main/SentimentWords)    
+Before run the project, pleas give the sentiment file path in [src/main/java/util/WordSentimentUtil.java](https://github.com/usf-cs677-fa20/P2-chenchenpi/blob/master/word-count-main/src/main/java/util/WordSentimentUtil.java)
 
 ## Advanced Analysis:
 
@@ -20,7 +25,7 @@ Draft report: https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_
      
   Step4: Now, we have total score and number of tweets for each hour. Do `FinalScore = TotalScore / NumberOfTweets` 24 times on our calculator to get the final result.
 
-## Final Project Dataset Prepeocess:
+## Final Project Dataset Prepprocess:
 
   After uploaded our dataset to HDFS, to the following job:
   
