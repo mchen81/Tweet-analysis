@@ -1,7 +1,7 @@
 # P2-JerryAndJiachen
 
-[Report in Google Document](https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_Xclvkgk1k8lhg/edit?usp=sharing)
-[Report in pdf](https://drive.google.com/file/d/1aEmwf2BMCImq8Xz6XtihdpWQbN66NUMJ/view?usp=sharing)
+[Report in Google Document](https://docs.google.com/document/d/1YIgvystgEzhgasAJKksMcnQ6aWyJd_Xclvkgk1k8lhg/edit?usp=sharing)   
+[Report in pdf](https://drive.google.com/file/d/1aEmwf2BMCImq8Xz6XtihdpWQbN66NUMJ/view?usp=sharing)   
 ## Sentiment Analysis
 We collected a lot of postive/negative vocabulary in englush.    
 The sentiment analysis is based on [the word lists](https://github.com/usf-cs677-fa20/P2-chenchenpi/tree/master/word-count-main/SentimentWords)    
